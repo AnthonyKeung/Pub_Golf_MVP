@@ -84,7 +84,7 @@ def get_list_view_html(product):
 @app.route("/")
 def index():
     """Function for Shirts4Mike Homepage"""
-    context = {"page_title": "Shirts 4 Mike", "current_year": date.today().year}
+    context = {"page_title": "PubGolf", "current_year": date.today().year}
     counter = 0
     product_data = []
     for product in products_info:
@@ -100,7 +100,7 @@ def index():
 @app.route("/shirts")
 def shirts():
     """Function for the Shirts Listing Page"""
-    context = {"page_title": "Shirts 4 Mike", "current_year": date.today().year}
+    context = {"page_title": "PubGolf", "current_year": date.today().year}
     product_data = []
     for product in products_info:
         product_data.append(Markup(get_list_view_html(product)))
