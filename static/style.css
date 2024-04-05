@@ -612,11 +612,11 @@ body {font-family: 'Oswald', sans-serif; background:#f0eeed; color: #676767;}
     line-height: 1.6;
     font-weight: normal;    
 }
-.section.page .shirt-details h1 {
+.section.page .checkout-details h1 {
     text-align: left;
 }
 .section.page p {width: 375px; margin-left: auto; margin-right: auto; }
-.section.page .shirt-details h1 .price {color: #9d9f4e; padding-right: 10px; font-size: 34px;}
+.section.page .checkout-details h1 .price {color: #9d9f4e; padding-right: 10px; font-size: 34px;}
 .section.shirts {padding-bottom: 42px; background: #fff;}
 .section.shirts h2 {
     font-size: 24px; 
@@ -682,11 +682,11 @@ body {font-family: 'Oswald', sans-serif; background:#f0eeed; color: #676767;}
     padding: 36px 0 61px;
 }
 .shirt-picture img {width: 292px;}
-.shirt-details {
+.checkout-details {
     width: 460px;
     float: right;
 }
-.shirt-details form {
+.checkout-details form {
     margin-left: 0;
 }
 form {width: 375px; margin: 34px auto;}
@@ -716,10 +716,9 @@ form input[type="submit"] {
     background: #9c9f4e;
     color: #FFF;
     -webkit-border-radius: 2px;
-    border-radius: 2px;    
-    font-size: 14px;
+    border-radius: 4px;    
+    font-size: 16px;
     text-transform: uppercase;
-    padding: 14px;
 }
 .breadcrumb {
     font-family: Helvetica, Arial, sans-serif;

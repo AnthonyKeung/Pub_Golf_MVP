@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{% block body %}
+<script src="https://www.paypal.com/sdk/js?client-id=ATlzYRh2ppFMu9jC1ejic_EPkqVaD_zcBqekHT-NKysWKifAHUpnvsdrAoVHXB7M_kRA2d9CurG8U5ge&currency=GBP"></script>
+    <div class="section page">
+
+        <div class="container">
+
+
+            
+                <h1 style="font-size: x-large; font-weight: bolder;">Checkout for 8 Hole Package £40</h1>
+
+
+
+                <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+
+                   
+                        <div class="form-group">
+                          <label for="formGroupExampleInput">Name</label>
+                          <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+                        </div>
+                        <div class="form-group">
+                          <label for="formGroupExampleInput2">Uni Email</label>
+                          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Society (if applicable)</label>
+                            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="">
+                          </div>
+
+                    <input type="hidden" name="cmd" value="_s-xclick">
+                    <input type="hidden" name="hosted_button_id" value="gg">
+                    <input type="hidden" name="item_name" value="8Hole">
+                    <input type="hidden" name="price" value="40">
+
+                    <div class="buttonholder" style="text-align: center; margin-top: 2%;">
+                        <button type="submit" class="btn btn-primary btn-lg">Pay with Paypal</button>
+                    <p style="font-size: small; margin-top: 0%;">(Paypal Account Not Required)</p>
+                    </div>
+
+
+<!-- Set up a container element for the button -->
+<div id="paypal-button-container"></div>
+<script>
+    paypal.Buttons({
+        // Sets up the transaction when a payment button is clicked
+        createOrder: (data, actions) => {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: '40' // Can also reference a variable or function
+                    }
+                }]
+            });
+        },
+        // Finalize the transaction after payer approval
+        onApprove: (data, actions) => {
+            return actions.order.capture().then(function (orderData) {
+                // Successful capture! For dev/demo purposes:
+                console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                const transaction = orderData.purchase_units[0].payments.captures[0];
+                alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+                // When ready to go live, remove the alert and show a success message within this page. For example:
+                // const element = document.getElementById('paypal-button-container');
+                // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                // Or go to another URL:  actions.redirect('thank_you.html');
+            });
+        }
+    }).render('#paypal-button-container');
+</script>
+                    
+                </form>
+            </div>
+    </div>
+{% endblock %}

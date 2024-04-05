@@ -46,40 +46,7 @@ products_info = [
 # Functions
 
 
-def get_list_view_html(product):
-    """Function to return html for given shirt
 
-    The product argument should be a dictionary in this structure:
-    {
-        "id": "shirt_id",
-        "name": "name_of_shirt",
-        "img": "image_name.jpg",
-        "price": price_of_shirt_as_int_or_flat,
-        "paypal": "paypal_id"
-        "sizes": ["array_of_sizes"]
-    }
-
-    The html is returned in this structure:
-    <li>
-      <a href="shirt/shirt_id">
-        <img src="/static/shirt_img" alt="shirt_name">
-        <p>View Details</p>
-      </a>
-    </li>
-    """
-    output = ""
-    image_url = url_for("static", filename=product["img"])
-    shirt_url = url_for("shirt", product_id=product["id"])
-    output = output + "<li>"
-    output = output + '<a href="' + shirt_url + '">'
-    output = (
-        output + '<img src="' + image_url +
-        '" al  t="' + product["name"] + '">')
-    output = output + "<p>View Details</p>"
-    output = output + "</a>"
-    output = output + "</li>"
-
-    return output
 
 
 # Routes
@@ -91,12 +58,6 @@ def index():
     context = {"page_title": "PubGolf", "current_year": date.today().year}
     counter = 0
     product_data = []
-    for product in products_info:
-        counter += 1
-        if counter < 5:  # Get first 4 shirts
-            product_data.append(
-                Markup(get_list_view_html(product))
-            )
     context["product_data"] = Markup("".join(product_data))
     return render_template("index.html", quantity=['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20'], **context)
 
@@ -116,16 +77,10 @@ def shirts():
     return render_template("shirts.html", **context)
 
 
-@app.route("/shirt/<product_id>")
-def shirt(product_id):
-    """Function for Individual Shirt Page"""
-    context = {"page_title": "PubGolf", "current_year": date.today().year}
-    my_product = ""
-    for product in products_info:
-        if product["id"] == product_id:
-            my_product = product
-    context["product"] = my_product
-    return render_template("shirt.html", **context)
+@app.route("/checkout")
+def checkout():
+    """Function for checkout page"""
+    return render_template("checkout.html")
 
 
 @app.route("/receipt")
