@@ -1,15 +1,18 @@
 # Main file for Shirts4Mike
 
+
 # Import statement
 from flask import (
     Flask,
     render_template,
-    Markup,
     url_for,
-    flash,
+    flash,  
     redirect,
-    request
+    request,
 )
+import flask_resize
+from markupsafe import Markup 
+
 
 import sendgrid
 from datetime import date
@@ -17,6 +20,7 @@ from datetime import date
 # App setup
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "some_really_long_random_string_here"
+
 
 # Get details for sendgrid details
 sendgrid_file = "sendgrid.txt"
@@ -94,7 +98,11 @@ def index():
                 Markup(get_list_view_html(product))
             )
     context["product_data"] = Markup("".join(product_data))
-    return render_template("index.html", **context)
+    return render_template("index.html", quantity=['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20'], **context)
+
+@app.route("/termsandconditions")
+def termsandconditions():
+    return render_template("termsandconditions.html")
 
 
 @app.route("/shirts")
