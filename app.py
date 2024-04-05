@@ -1,5 +1,7 @@
 # Main file for Shirts4Mike
-
+from pathlib import Path
+THIS_FOLDER = Path(__file__).parent.resolve()
+sendgrid_file = THIS_FOLDER / "sendgrid.txt"
 
 # Import statement
 from flask import (
