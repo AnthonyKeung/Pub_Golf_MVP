@@ -1,15 +1,17 @@
 {% extends "layout.html" %}
 {% block body %}
-<div class="section banner">
 
-			<div class="wrapper">
-
-				<img class="hero" src="{{ url_for("static", filename="map.png") }}">
-	
-			</div>
-
+<div class="container">
+	<div class="row">
+		<div class="col-sm-1"></div>
+		<div class="col-sm-10" >
+			<img src="static/route.jpg" style="max-width: 100%;">
 		</div>
-		<br></br>
+		<div class="col-sm-1"></div>
+	</div>
+
+</div>
+
 <div class="container" style="border: 5px solid black"  >
 	<div class="row">
 		<div class="col-sm-6" style="text-align: center; font-weight: bolder; font-size: 3vw;">7:00pm</div>
@@ -29,29 +31,6 @@
 				<h1><span class="price" style="font-weight: bold;">£40 </span>8 Hole Package</h1>
 
 				<form target="checkout" name="checkout" action="/checkout" method="get" target="_top">
-
-						<table>
-						<tr>
-								<th>
-										<input type="hidden" name="quantity" value="quantity">
-										<label for="quantity">Quantity</label>
-								</th>
-								<td>
-										<select name="quantity" id="quantity">
-												{%  for quan in quantity %}
-														<option value="{{ quan }}">{{ quan }} </option>
-												{% endfor %}
-										</select>
-								</td>
-						</tr>
-						
-						</table>
-							<div class="form-check" style="margin-top: 2%;">
-								<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-								<label class="form-check-label" for="flexCheckDefault">
-									Must Accept <a href="#" onClick="MyWindow=window.open('/termsandconditions','MyWindow','width=600,height=300');">Terms and Conditions</a>
-								</label>
-							</div>
 
 						<input type="submit" value="Checkout" name="submit" style="margin-top: 2%;">
 				</form>

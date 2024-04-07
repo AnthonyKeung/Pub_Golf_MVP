@@ -25,7 +25,6 @@ app.config["SECRET_KEY"] = "some_really_long_random_string_here"
 
 
 # Get details for sendgrid details
-sendgrid_file = "sendgrid.txt"
 sendgrid_details = []
 
 with open(sendgrid_file) as f:
@@ -61,7 +60,7 @@ def index():
     counter = 0
     product_data = []
     context["product_data"] = Markup("".join(product_data))
-    return render_template("index.html", quantity=['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20'], **context)
+    return render_template("index.html", **context)
 
 @app.route("/termsandconditions")
 def termsandconditions():
@@ -82,7 +81,7 @@ def shirts():
 @app.route("/checkout")
 def checkout():
     """Function for checkout page"""
-    return render_template("checkout.html")
+    return render_template("checkout.html",quantity=['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20'])
 
 
 @app.route("/receipt")
