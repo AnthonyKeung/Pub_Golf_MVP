@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block body %}
-<script src="https://www.paypal.com/sdk/js?client-id=Ae4YDp1BcCpDYnFZSvZzgEjiTQPMUSxVxEkPFFELIiFY9SHlR-WEsN-szQQunxA5DiDjVGh_1STCaGz7&currency=GBP"></script>
+<!--<script src="https://www.paypal.com/sdk/js?client-id=Ae4YDp1BcCpDYnFZSvZzgEjiTQPMUSxVxEkPFFELIiFY9SHlR-WEsN-szQQunxA5DiDjVGh_1STCaGz7&currency=GBP"></script>-->
+<script src="https://www.paypal.com/sdk/js?client-id=AWLD1Wt0dWZAxm14AceDnqNrQJFmrvGMUTte9CQ6q9EX4pyowNNwxx1K9rmsqR70osnvCVHpBEwCQ_Yy&currency=GBP"></script>
 
         <div class="container">
             <br></br>
@@ -54,10 +55,10 @@
                 purchase_units: [{
                     amount: {
                         "currency_code": 'GBP',
-                        value: 2 * document.getElementById("quantity").value,
+                        value: 1 * document.getElementById("quantity").value,
                         breakdown: {
                             item_total: {
-                                value: 2 * document.getElementById("quantity").value,
+                                value: 1 * document.getElementById("quantity").value,
                                 "currency_code": 'GBP',
                             },
                         }
@@ -68,7 +69,7 @@
                             
                             unit_amount: {
                                 currency_code: "GBP",
-                                value: 2
+                                value: 1
                             },
                             quantity: document.getElementById("quantity").value,
                         }

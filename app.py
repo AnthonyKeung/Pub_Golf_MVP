@@ -117,9 +117,12 @@ def capture_payment(order_id):  # Checks and confirms payment
     # print(captured_payment) # or you can do some checks from this captured data details
     return jsonify(captured_payment)
 def approve_payment(order_id):
-    api_link = f"https://api-m.sandbox.paypal.com/v2/checkout/orders/{order_id}/capture"
-    client_id = "Ae4YDp1BcCpDYnFZSvZzgEjiTQPMUSxVxEkPFFELIiFY9SHlR-WEsN-szQQunxA5DiDjVGh_1STCaGz7"
-    secret = "EDfuxXiy0HIh3R8BWYIChfmTtme3Gbr20OQMK1vK6mTOJuHnV-OkrREXZrrJV5cjVzK7jL1IZxCzi2_4"
+    #api_link = f"https://api-m.sandbox.paypal.com/v2/checkout/orders/{order_id}/capture"
+    api_link = f"https://api-m.paypal.com/v2/checkout/orders/{order_id}"
+    #test_client_id = "Ae4YDp1BcCpDYnFZSvZzgEjiTQPMUSxVxEkPFFELIiFY9SHlR-WEsN-szQQunxA5DiDjVGh_1STCaGz7"
+    #test_secret = "EDfuxXiy0HIh3R8BWYIChfmTtme3Gbr20OQMK1vK6mTOJuHnV-OkrREXZrrJV5cjVzK7jL1IZxCzi2_4"
+    client_id = "AWLD1Wt0dWZAxm14AceDnqNrQJFmrvGMUTte9CQ6q9EX4pyowNNwxx1K9rmsqR70osnvCVHpBEwCQ_Yy"
+    secret = "EOSD6rVl3yMZs5PMhu-MfYBwzuyH_MOnanLqIrCzxfL0Nugngok7lix5ElJcUF3a-xd7-bv0EPynw7cS"
     basic_auth = HTTPBasicAuth(client_id, secret)
     headers = {
         "Content-Type": "application/json",
