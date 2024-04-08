@@ -13,22 +13,19 @@
 </head>
 <body>
 
-	<div class="container" style="height:12vh; align-items: center; flex-direction: column; display: flex;">
+	<div class="container" style="height:12vh; align-items: center; flex-direction: column; display: flex; background-color: #C1B984; max-width: 100%;">
 		<img src="static/logo.png" style="max-height: 100%;">
 	</div>
 
-	<div id="content">
+	
 	{% block body %}{% endblock %}
-	</div>
+	
 
 	<div class="footer">
 
 		<div class="wrapper">
-
-			<ul>		
-				<li><a href="http://twitter.com/treehouse">Twitter</a></li>
-				<li><a href="https://www.facebook.com/TeamTreehouse">Facebook</a></li>
-			</ul>
+			<a href="https://www.instagram.com/the_pubcrawlers/"><img src="static/insta.png"  style="max-width: 5%;"></a>
+		
 
 			<p>&copy;{{ current_year }} PubGolf</p>
 

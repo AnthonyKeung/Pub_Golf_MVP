@@ -11,9 +11,12 @@ from flask import (
     flash,  
     redirect,
     request,
+    jsonify,
 )
 import flask_resize
 from markupsafe import Markup 
+import requests
+from requests.auth import HTTPBasicAuth
 
 
 import sendgrid
@@ -65,6 +68,28 @@ def index():
 @app.route("/termsandconditions")
 def termsandconditions():
     return render_template("termsandconditions.html")
+@app.route("/form")
+def form():
+    return render_template("form.html")
+
+@app.route("/payments/<order_id>/capture", methods=["POST"])
+def capture_payment(order_id):  # Checks and confirms payment
+    captured_payment = approve_payment(order_id)
+    # print(captured_payment) # or you can do some checks from this captured data details
+    return jsonify(captured_payment)
+def approve_payment(order_id):
+    api_link = f"https://api-m.sandbox.paypal.com/v2/checkout/orders/{order_id}/capture"
+    client_id = "Ae4YDp1BcCpDYnFZSvZzgEjiTQPMUSxVxEkPFFELIiFY9SHlR-WEsN-szQQunxA5DiDjVGh_1STCaGz7"
+    secret = "EDfuxXiy0HIh3R8BWYIChfmTtme3Gbr20OQMK1vK6mTOJuHnV-OkrREXZrrJV5cjVzK7jL1IZxCzi2_4"
+    basic_auth = HTTPBasicAuth(client_id, secret)
+    headers = {
+        "Content-Type": "application/json",
+    }
+    response = requests.post(url=api_link, headers=headers, auth=basic_auth)
+    response.raise_for_status()
+    json_data = response.json()
+    return json_data
+
 
 
 @app.route("/shirts")

@@ -517,8 +517,11 @@ html {overflow-y: scroll; overflow-x: hidden;}
 html {
     height: 100%;
 }
-body {font-family: 'Oswald', sans-serif; background-color: #82b1c7 !important;}
+body {font-family: 'Oswald', sans-serif; background-color: #F5F5F5 !important;}
 
+.row-container {display: flex; width: 100%; height: 100%; flex-direction: column; background-color: blue; overflow: hidden;}
+.first-row {background-color: lime; }
+.second-row { flex-grow: 1; border: none; margin: 0; padding: 0; }
 
 .wrapper {width: 980px; margin: 0 auto;}
 
