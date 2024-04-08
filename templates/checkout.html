@@ -7,33 +7,32 @@
             <br></br>
 
                 <h1 style="font-size: xx-large; font-weight: bolder; text-align: center;">Checkout for 6 Hole Package - £25</h1>
-                <p style="text-align: center;">On Successful completion of payment, you will then be asked to submit your name, University Email and Society (if applicable).</p>
+                <p style="text-align: center;">On Successful completion of payment, you will then be asked to submit a form of Name, University Email and Society (if applicable).</p>
                 <p style="text-align: center;">A confirmation email of your purchase will follow.</p>
         </div>
 
 
         <div class="container">
-                <form id="checkout-form" style="border: 5px black solid; padding: 3%;">
-                    <div class="quantity">
-                        <table style="margin-top: 2%; max-width: 100%; " >
-                            <tr>
-                                    <th>
-                                            <input type="hidden" name="quantity" value="quantity">
-                                            <label for="quantity">Quantity</label>
-                                    </th>
-                                    <td>
-                                        <select name="quantity" id="quantity">
-                                            {%  for quan in quantity %}
-                                                    <option value="{{ quan }}">{{ quan }} </option>
-                                            {% endfor %}
-                                    </select>
-                                    </td>
-                            </tr>
-                            </table>
+                <form name="checkout-form" id="checkout-form" style="border: 5px black solid; padding: 3%;">
+                    
+                    <div class="quantity-form">
+                    <select class="form-select" aria-label="Default select example" id="quantity" style="padding-bottom: 2%;">
+                        <option selected>Choose Number of Tickets</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                      </select>
                     </div>
                     
 
-                        <div class="form-check" style="padding-bottom: 4%;">
+                        <div class="form-check" style="padding-bottom: 4%; margin-top: 2%;">
                             <input class="form-check-input" type="checkbox" value="" id="check" >
                             <label class="form-check-label" for="flexCheckDefault" >
                             Must Accept <a href="#" onClick="MyWindow=window.open('/termsandconditions','MyWindow','width=600,height=300');">Terms and Conditions</a>
@@ -45,29 +44,34 @@
 <!-- Set up a container element for the button -->
 <div id="paypal-button-container"></div>
 <script>
+    var quan = document.getElementById("quantity").value;
     paypal.Buttons({
-
-        onInit: function(data, actions) {
-      // Disable the buttons
-      actions.disable();
-      // Listen for changes to the checkbox
-      document.querySelector('#check')
-        .addEventListener('change', function(event) {
-          // Enable or disable the button when it is checked or unchecked
-          if (event.target.checked) {
-            actions.enable();
-          } else {
-            actions.disable();
-          }
-        });
-    },
     
     createOrder: (data, actions) => {
+        console.log(document.getElementById("quantity").value)
             return actions.order.create({
                 purchase_units: [{
                     amount: {
-                        value: '1' // Can also reference a variable or function
-                    }
+                        "currency_code": 'GBP',
+                        value: 2 * document.getElementById("quantity").value,
+                        breakdown: {
+                            item_total: {
+                                value: 2 * document.getElementById("quantity").value,
+                                "currency_code": 'GBP',
+                            },
+                        }
+                    },
+                    items: [
+                        {
+                            name: "6 Hole Ticket",
+                            
+                            unit_amount: {
+                                currency_code: "GBP",
+                                value: 2
+                            },
+                            quantity: document.getElementById("quantity").value,
+                        }
+                    ]
                 }]
             });
         },
@@ -85,7 +89,7 @@
                     // When ready to go live, remove the alert and show a success message within this page. For example:
                     window.location.href = '/form';
                     const element = document.getElementById('paypal-button-container');
-                    element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                    //element.innerHTML = '<h3>Thank you for your payment!</h3>';
                     
                 });
         }

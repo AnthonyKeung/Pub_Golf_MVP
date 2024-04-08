@@ -12,4 +12,5 @@ smtpapi==0.1.2
 unittest2==0.8.0
 unittest2py3k==0.5.1
 urllib3==1.25.3
-flask-resize
+Flask-Mail==0.9.1
+requests

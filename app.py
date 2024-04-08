@@ -12,11 +12,15 @@ from flask import (
     redirect,
     request,
     jsonify,
+    session
 )
-import flask_resize
 from markupsafe import Markup 
 import requests
 from requests.auth import HTTPBasicAuth
+from flask_mail import Mail
+from flask_mail import Message
+
+
 
 
 import sendgrid
@@ -24,7 +28,17 @@ from datetime import date
 
 # App setup
 app = Flask(__name__)
+
 app.config["SECRET_KEY"] = "some_really_long_random_string_here"
+
+app.config['MAIL_SERVER']="smtp.gmail.com"
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USERNAME'] = "anthony@PubCrawlers.uk"
+app.config['MAIL_PASSWORD'] = "bycc reor hqxx cycz"
+app.config['MAIL_USE_TLS'] = True
+
+
+mail = Mail(app)
 
 
 # Get details for sendgrid details
@@ -49,7 +63,11 @@ products_info = [
 
 # Functions
 
-
+def send_email(subject, sender, recipients, text_body, html_body):
+    msg = Message(subject, sender=sender, recipients=recipients)
+    msg.body = text_body
+    msg.html = html_body
+    mail.send(msg)
 
 
 
@@ -62,8 +80,8 @@ def index():
     context = {"page_title": "PubGolf", "current_year": date.today().year}
     counter = 0
     product_data = []
-    context["product_data"] = Markup("".join(product_data))
-    return render_template("index.html", **context)
+    session.clear()
+    return render_template("index.html")
 
 @app.route("/termsandconditions")
 def termsandconditions():
@@ -74,13 +92,31 @@ def form():
 
 @app.route("/formsubmit", methods=['POST'])
 def formsubmit():
-    print(request.form.get("name"))
-    print(request.form['name'])
-    return render_template("form.html")
+    name = request.form['name']
+    email = request.form['email']
+    society = request.form['society']
+    home_email = 'events@pubcrawlers.uk'
+    try:
+        order_id = session['order']
+    except:
+        pass
+    try:
+        amount = session['amount']
+    except:
+        pass
+    quantity = int(amount) // 25
+
+    send_email("PubCrawlers UK Order Confirmation",
+                  sender="events@pubcrawlers.uk",
+                  recipients=[email, home], text_body="", html_body=render_template('email_templates/confirmation_template.html', name=name, society=society, order_id=order_id))
+
+    return render_template("index.html")
 
 @app.route("/payments/<order_id>/capture", methods=["POST"])
 def capture_payment(order_id):  # Checks and confirms payment
     captured_payment = approve_payment(order_id)
+    session['order'] = order_id
+    session['amount'] = captured_payment['purchase_units'][0]['payments']['captures'][0]['amount']['value']
     # print(captured_payment) # or you can do some checks from this captured data details
     return jsonify(captured_payment)
 def approve_payment(order_id):
@@ -97,16 +133,6 @@ def approve_payment(order_id):
     return json_data
 
 
-
-@app.route("/shirts")
-def shirts():
-    """Function for the Shirts Listing Page"""
-    context = {"page_title": "PubGolf", "current_year": date.today().year}
-    product_data = []
-    for product in products_info:
-        product_data.append(Markup(get_list_view_html(product)))
-    context["product_data"] = Markup("".join(product_data))
-    return render_template("shirts.html", **context)
 
 
 @app.route("/checkout")
@@ -129,23 +155,7 @@ def contact():
     return render_template("contact.html", **context)
 
 
-# Route to send email
-@app.route("/send", methods=['POST'])
-def send():
-    """Function to send email using sendgrid API"""
-    sendgrid_object = sendgrid.SendGridClient(
-        sendgrid_details[0], sendgrid_details[1])
-    message = sendgrid.Mail()
-    sender = request.form["email"]
-    subject = request.form["name"]
-    body = request.form["message"]
-    message.add_to("charlie.thomas@attwoodthomas.net")
-    message.set_from(sender)
-    message.set_subject(subject)
-    message.set_html(body)
-    sendgrid_object.send(message)
-    flash("Email sent.")
-    return redirect(url_for("contact"))
+
 
 
 # Run application
