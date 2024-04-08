@@ -72,6 +72,12 @@ def termsandconditions():
 def form():
     return render_template("form.html")
 
+@app.route("/formsubmit", methods=['POST'])
+def formsubmit():
+    print(request.form.get("name"))
+    print(request.form['name'])
+    return render_template("form.html")
+
 @app.route("/payments/<order_id>/capture", methods=["POST"])
 def capture_payment(order_id):  # Checks and confirms payment
     captured_payment = approve_payment(order_id)

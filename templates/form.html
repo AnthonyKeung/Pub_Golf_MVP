@@ -1,50 +1,36 @@
 {% extends "layout.html" %}
 {% block body %}
 <script src="https://www.paypal.com/sdk/js?client-id=ATlzYRh2ppFMu9jC1ejic_EPkqVaD_zcBqekHT-NKysWKifAHUpnvsdrAoVHXB7M_kRA2d9CurG8U5ge&currency=GBP"></script>
-    <div class="section page">
 
         <div class="container">
+            <br></br>
 
-                <h1 style="font-size: x-large; font-weight: bolder;">Thanks for you Order!</h1>
+                <h1 style="font-size: x-large; font-weight: bolder; text-align: center;">Thanks for you Order!</h1>
+                <h1 style="font-size: large; font-weight: bold; text-align: center;">Please Input your Name, University Email and Society</h1>
 
-                <h2>Please Input your Name, email and Society</h2>
+                <div class="container">
 
+                <form name="checkout-form" action="/formsubmit" method="POST" style="border: 5px black solid; padding: 3%;">
 
-
-                <form id="checkout-form">
-
-                   
                         <div class="form-group">
                           <label for="formGroupExampleInput">Name</label>
-                          <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+                          <input type="text" class="form-control" name="name" id="name" placeholder="">
                         </div>
                         <div class="form-group">
                           <label for="formGroupExampleInput2">Uni Email</label>
-                          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="">
+                          <input type="text" class="form-control" name="email" id="email" placeholder="">
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput2">Society (if applicable)</label>
-                            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="">
+                            <input type="text" class="form-control" name="society" id="society" placeholder="">
                           </div>
-                          <table style="margin-top: 2%;">
-                            <tr>
-                                    <th>
-                                            <input type="hidden" name="quantity" value="quantity">
-                                            <label for="quantity">Quantity</label>
-                                    </th>
-                                    <td>
-                                        <select name="quantity" id="quantity">
-                                            {%  for quan in quantity %}
-                                                    <option value="{{ quan }}">{{ quan }} </option>
-                                            {% endfor %}
-                                    </select>
-                                    </td>
-                            </tr>
-                            </table>
+
+                            <div class="d-grid gap-2" style="margin-top: 4%;">
+                                <button class="btn btn-dark" type="submit">Submit Details</button>
+                              </div>
             
-         
                 </form>
             </div>
+            </div>
         </div>
-    </div>
 {% endblock %}

@@ -1,30 +1,21 @@
 {% extends "layout.html" %}
 {% block body %}
 <script src="https://www.paypal.com/sdk/js?client-id=Ae4YDp1BcCpDYnFZSvZzgEjiTQPMUSxVxEkPFFELIiFY9SHlR-WEsN-szQQunxA5DiDjVGh_1STCaGz7&currency=GBP"></script>
-    <div class="section page">
 
         <div class="container">
+            <br></br>
+            <br></br>
 
-                <h1 style="font-size: x-large; font-weight: bolder;">Checkout for 8 Hole Package £40</h1>
+                <h1 style="font-size: xx-large; font-weight: bolder; text-align: center;">Checkout for 6 Hole Package - £35</h1>
+                <p style="text-align: center;">On Successful completion of payment, you will then be asked to submit your name, University Email and Society (if applicable).</p>
+                <p style="text-align: center;">A confirmation email of your purchase will follow.</p>
+        </div>
 
 
-
-                <form id="checkout-form">
-
-                   
-                        <div class="form-group">
-                          <label for="formGroupExampleInput">Name</label>
-                          <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
-                        </div>
-                        <div class="form-group">
-                          <label for="formGroupExampleInput2">Uni Email</label>
-                          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label for="formGroupExampleInput2">Society (if applicable)</label>
-                            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="">
-                          </div>
-                          <table style="margin-top: 2%;">
+        <div class="container">
+                <form id="checkout-form" style="border: 5px black solid; padding: 3%;">
+                    <div class="quantity">
+                        <table style="margin-top: 2%; max-width: 100%; " >
                             <tr>
                                     <th>
                                             <input type="hidden" name="quantity" value="quantity">
@@ -39,11 +30,12 @@
                                     </td>
                             </tr>
                             </table>
-                        
+                    </div>
+                    
 
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="check">
-                            <label class="form-check-label" for="flexCheckDefault">
+                        <div class="form-check" style="padding-bottom: 4%;">
+                            <input class="form-check-input" type="checkbox" value="" id="check" >
+                            <label class="form-check-label" for="flexCheckDefault" >
                             Must Accept <a href="#" onClick="MyWindow=window.open('/termsandconditions','MyWindow','width=600,height=300');">Terms and Conditions</a>
                             </label>
                         </div>
@@ -103,5 +95,4 @@
                 </form>
             </div>
         </div>
-    </div>
 {% endblock %}
