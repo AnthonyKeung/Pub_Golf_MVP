@@ -76,10 +76,6 @@ def send_email(subject, sender, recipients, text_body, html_body):
 
 @app.route("/")
 def index():
-    """Function for Shirts4Mike Homepage"""
-    context = {"page_title": "PubGolf", "current_year": date.today().year}
-    counter = 0
-    product_data = []
     session.clear()
     return render_template("index.html")
 
@@ -99,16 +95,17 @@ def formsubmit():
     try:
         order_id = session['order']
     except:
-        pass
+        order_id=0
     try:
         amount = session['amount']
+        quantity = str(float(amount) // 25)
     except:
-        pass
-    quantity = int(amount) // 25
+        amount = 'NA'
+        quantity = 'NA'
 
     send_email("PubCrawlers UK Order Confirmation",
                   sender="events@pubcrawlers.uk",
-                  recipients=[email, home], text_body="", html_body=render_template('email_templates/confirmation_template.html', name=name, society=society, order_id=order_id))
+                  recipients=[email, home_email], text_body="", html_body=render_template('email_templates/confirmation_template.html', name=name, society=society, order_id=order_id, amount=amount, quantity=quantity))
 
     return render_template("index.html")
 
