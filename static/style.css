@@ -732,9 +732,11 @@ form input[type="submit"] {
 @media all and (min-width: 500px) {
     .deskBanner {display:block;}
     .phoneBanner {display:none;}
+    .deskFooter {display:block;}
+    .phoneFooter {display:none;}
 }
 
 @media all and (max-width: 499px) {
-    .deskBanner {display:none;}
-    .phoneBanner {display:block;}
+    .deskFooter {display:none;}
+    .phoneFooter {display:block;}
 }
