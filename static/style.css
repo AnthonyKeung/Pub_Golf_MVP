@@ -728,3 +728,13 @@ form input[type="submit"] {
 .footer a {text-decoration: none; color: #539def; margin: 0 10px;}
 .footer li:first-child a {margin-left: 4px;}
 .footer a:hover, .footer a:active {text-decoration: underline;}
+
+@media all and (min-width: 500px) {
+    .deskBanner {display:block;}
+    .phoneBanner {display:none;}
+}
+
+@media all and (max-width: 499px) {
+    .deskBanner {display:none;}
+    .phoneBanner {display:block;}
+}
