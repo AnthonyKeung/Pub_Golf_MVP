@@ -1,6 +1,6 @@
-# PubGolfPOC
+# PubGolfMVP
 
-This repository contains the PubGolfPOC application. Follow the instructions below to run the `app.py` script.
+This repository contains the PubGolfMVP application. Follow the instructions below to run the `app.py` script.
 
 ## Prerequisites
 
@@ -41,4 +41,4 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 
 ## Contact
 
-For any questions or issues, please open an issue in the repository or contact the maintainer at your.email@example.com.
+For any questions or issues, please open an issue in the repository or contact the maintainer at aywk20@bath.ac.uk 
